@@ -83,7 +83,7 @@
           center: 'title',
           right: 'dayGridMonth,listWeek'
         },
-                eventSources: [
+        eventSources: [
           {
             googleCalendarApiKey: 'YOUR_API_KEY',
             googleCalendarId: 'en.indian#holiday@group.v.calendar.google.com',
@@ -92,30 +92,10 @@
           },
           {
             events: [
-              // 🔹 School Events
-              {
-                title: 'Science Exhibition',
-                start: '2025-07-10',
-                description: 'Annual science fair in the school auditorium.',
-                color: '#2196f3'
-              },
-              {
-                title: 'Parent-Teacher Meeting',
-                start: '2025-07-15',
-                color: '#4caf50'
-              },
-              {
-                title: 'Midterm Exams Begin',
-                start: '2025-07-22',
-                color: '#9c27b0'
-              },
-              {
-                title: 'Sports Day',
-                start: '2025-08-05',
-                color: '#ff9800'
-              },
-
-              // 🔹 Holidays
+              { title: 'Science Exhibition', start: '2025-07-10', description: 'Annual science fair in the school auditorium.', color: '#2196f3' },
+              { title: 'Parent-Teacher Meeting', start: '2025-07-15', color: '#4caf50' },
+              { title: 'Midterm Exams Begin', start: '2025-07-22', color: '#9c27b0' },
+              { title: 'Sports Day', start: '2025-08-05', color: '#ff9800' },
               { title: 'Eid-ul-Fitr', start: '2025-03-31', color: '#e91e63' },
               { title: 'Ram Navami', start: '2025-04-06', color: '#e91e63' },
               { title: 'Mahavir Jayanti', start: '2025-04-10', color: '#e91e63' },
@@ -136,41 +116,15 @@
               { title: 'Makar Sankranti', start: '2026-01-14', color: '#e91e63' },
               { title: 'Basant Panchami', start: '2026-01-23', color: '#e91e63' },
               { title: 'Maha Shivratri', start: '2026-02-15', color: '#e91e63' },
-
-              // 🔹 Holi Break (3 Days)
               { title: 'Holi Break - Day 1', start: '2026-03-03', color: '#8e24aa' },
               { title: 'Holi Break - Day 2', start: '2026-03-04', color: '#8e24aa' },
               { title: 'Holi Break - Day 3', start: '2026-03-05', color: '#8e24aa' },
-
-              // 🔹 Vacation Periods
-              {
-                title: 'Summer Vacation',
-                start: '2025-05-19',
-                end: '2025-06-15',
-                color: '#00bcd4'
-              },
-              {
-                title: 'Durga Puja Vacation',
-                start: '2025-09-29',
-                end: '2025-10-05',
-                color: '#ff5722'
-              },
-              {
-                title: 'Deepavali & Chhath',
-                start: '2025-10-20',
-                end: '2025-10-30',
-                color: '#ff9800'
-              },
-              {
-                title: 'Winter Break',
-                start: '2025-12-30',
-                end: '2026-01-04',
-                color: '#607d8b'
-              }
+              { title: 'Summer Vacation', start: '2025-05-19', end: '2025-06-15', color: '#00bcd4' },
+              { title: 'Durga Puja Vacation', start: '2025-09-29', end: '2025-10-05', color: '#ff5722' },
+              { title: 'Deepavali & Chhath', start: '2025-10-20', end: '2025-10-30', color: '#ff9800' },
+              { title: 'Winter Break', start: '2025-12-30', end: '2026-01-04', color: '#607d8b' }
             ]
           }
-        ],
-
         ],
         eventClick: function(info) {
           info.jsEvent.preventDefault();
