@@ -1,163 +1,149 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>School Activity Calendar | Davkatar</title>
-
-  <!-- Tailwind CSS -->
+  <title>📅 School Activity Calendar | Davkatar</title>
   <script src="https://cdn.tailwindcss.com"></script>
-
-  <!-- FullCalendar CSS -->
   <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.css" rel="stylesheet"/>
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background-color: #f9f9f9;
+      background: linear-gradient(to right, #fef08a, #93c5fd);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      animation: bgFade 15s ease infinite alternate;
     }
+
+    @keyframes bgFade {
+      from { background: linear-gradient(to right, #fef08a, #93c5fd); }
+      to   { background: linear-gradient(to right, #93c5fd, #fef08a); }
+    }
+
+    .animate-pop {
+      animation: popIn 0.6s ease;
+    }
+
+    @keyframes popIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+
+    .fade-in {
+      animation: fadeIn 1s ease-out both;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .hover-zoom:hover {
+      transform: scale(1.05);
+      transition: all 0.3s ease-in-out;
+    }
+
     #calendar {
       max-width: 900px;
       margin: 40px auto;
-      background: #fff;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+      background: #ffffff;
+      padding: 24px;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      animation: popIn 1s ease;
     }
   </style>
 </head>
 <body>
 
   <!-- Header -->
-  <header class="bg-yellow-500 text-white p-4 shadow-md flex justify-between items-center">
-    <h1 class="text-2xl font-bold">Davkatar</h1>
-    <button onclick="toggleExplore()" class="group relative p-2 rounded-full hover:bg-green-600 transition" title="Explore">
+  <header class="bg-gradient-to-r from-yellow-400 via-yellow-300 to-blue-400 text-white p-5 shadow-lg flex justify-between items-center animate-pop">
+    <h1 class="text-3xl font-bold flex items-center gap-2">📘 Davkatar</h1>
+    <button onclick="toggleExplore()" class="group relative p-2 rounded-full hover:bg-blue-600 transition duration-300" title="Explore">
       <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 fill-current text-white group-hover:text-gray-200" viewBox="0 0 24 24">
         <circle cx="12" cy="5" r="2"/>
         <circle cx="12" cy="12" r="2"/>
         <circle cx="12" cy="19" r="2"/>
       </svg>
-      <div class="absolute -top-10 right-0 bg-black text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition duration-200 pointer-events-none">
+      <div class="absolute -top-10 right-0 bg-black text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition duration-300">
         Explore
       </div>
     </button>
   </header>
 
   <!-- Explore Section -->
-  <section id="explore-section" class="max-w-5xl mx-auto mt-8 p-6 bg-white rounded-2xl shadow-lg hidden">
-    <h2 class="text-xl font-bold text-green-700 mb-4">Explore</h2>
+  <section id="explore-section" class="hidden max-w-6xl mx-auto mt-8 p-6 bg-white/90 backdrop-blur-lg rounded-2xl shadow-xl fade-in">
+    <h2 class="text-xl font-bold text-blue-800 mb-4">🧭 Explore Section</h2>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-      <a href="https://davkatar.github.io/report/" class="p-4 bg-gray-50 hover:bg-gray-100 border rounded-xl shadow">
-        <h3 class="text-lg font-semibold text-gray-700 mb-2">Report Issues & Complaints</h3>
-        <p class="text-sm text-gray-600">Submit problems or concerns to school admins.</p>
+      <a href="https://davkatar.github.io/report/" class="transition-transform hover-zoom p-4 bg-yellow-50 border rounded-xl shadow-lg">
+        <h3 class="text-lg font-semibold text-yellow-800 mb-1">📢 Report Issues</h3>
+        <p class="text-sm text-gray-600">Let us know if something’s wrong!</p>
       </a>
-      <a href="https://davkatar.github.io/dav/" class="p-4 bg-gray-50 hover:bg-gray-100 border rounded-xl shadow">
-        <h3 class="text-lg font-semibold text-gray-700 mb-2">Q&A Portal</h3>
-        <p class="text-sm text-gray-600">Browse questions and answers or ask your own.</p>
+      <a href="https://davkatar.github.io/dav/" class="transition-transform hover-zoom p-4 bg-blue-50 border rounded-xl shadow-lg">
+        <h3 class="text-lg font-semibold text-blue-800 mb-1">💬 Q&A Portal</h3>
+        <p class="text-sm text-gray-600">Ask questions, get help!</p>
       </a>
-      <a href="#" class="p-4 bg-gray-50 hover:bg-gray-100 border rounded-xl shadow">
-        <h3 class="text-lg font-semibold text-gray-700 mb-2">More Features</h3>
-        <p class="text-sm text-gray-600">Explore more tools and student services.</p>
+      <a href="#" class="transition-transform hover-zoom p-4 bg-yellow-100 border rounded-xl shadow-lg">
+        <h3 class="text-lg font-semibold text-blue-900 mb-1">✨ More Tools</h3>
+        <p class="text-sm text-gray-600">More features coming soon!</p>
       </a>
     </div>
   </section>
 
-  <!-- Calendar Title -->
-  <h2 class="text-center text-2xl font-bold text-gray-800 mt-12">School Activity Calendar</h2>
+  <!-- Title -->
+  <h2 class="text-center text-3xl font-bold text-blue-700 mt-12 fade-in">📅 School Activity Calendar</h2>
 
   <!-- Calendar Container -->
   <div id="calendar"></div>
 
-  <!-- FullCalendar JS -->
-  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js"></script>
-
   <!-- Script -->
   <script>
+    function toggleExplore() {
+      const section = document.getElementById('explore-section');
+      section.classList.toggle('hidden');
+      section.classList.add('fade-in');
+    }
+
     document.addEventListener('DOMContentLoaded', function () {
       const calendarEl = document.getElementById('calendar');
+      const today = new Date().toISOString().slice(0, 10);
+
+      const specialDays = ['2025-08-15', '2025-06-01', '2025-11-14']; // Add more as needed
 
       const calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: 'dayGridMonth',
         headerToolbar: {
           left: 'prev,next today',
           center: 'title',
-          right: 'dayGridMonth,listWeek'
+          right: 'dayGridMonth,timeGridWeek,listWeek'
         },
-        eventSources: [
-          {
-            googleCalendarApiKey: 'YOUR_API_KEY',
-            googleCalendarId: 'en.indian#holiday@group.v.calendar.google.com',
-            color: '#ff5722',
-            textColor: 'white'
-          },
-          {
-            events: [
-              { title: 'Eid-ul-Fitr', start: '2025-03-31', color: '#e91e63' },
-              { title: 'Ram Navami', start: '2025-04-06', color: '#e91e63' },
-              { title: 'Mahavir Jayanti', start: '2025-04-10', color: '#e91e63' },
-              { title: 'Vaisakhi', start: '2025-04-13', color: '#e91e63' },
-              { title: 'Ambedkar Jayanti', start: '2025-04-14', color: '#e91e63' },
-              { title: 'Good Friday', start: '2025-04-18', color: '#e91e63' },
-              { title: 'Buddha Purnima', start: '2025-05-12', color: '#e91e63' },
-              { title: 'Bakrid', start: '2025-06-07', color: '#e91e63' },
-              { title: 'Muharram', start: '2025-07-06', color: '#e91e63' },
-              { title: 'Raksha Bandhan', start: '2025-08-09', color: '#e91e63' },
-              { title: 'Krishna Janmashtami', start: '2025-08-16', color: '#e91e63' },
-              { title: 'Teej', start: '2025-08-27', color: '#e91e63' },
-              { title: 'Jeevit Putrika Vrat', start: '2025-09-14', color: '#e91e63' },
-              { title: 'Vishwakarma Puja', start: '2025-09-17', color: '#e91e63' },
-              { title: 'Gandhi Jayanti', start: '2025-10-02', color: '#e91e63' },
-              { title: 'Guru Nanak Jayanti', start: '2025-11-05', color: '#e91e63' },
-              { title: 'Christmas', start: '2025-12-25', color: '#e91e63' },
-              { title: 'Makar Sankranti', start: '2026-01-14', color: '#e91e63' },
-              { title: 'Basant Panchami', start: '2026-01-23', color: '#e91e63' },
-              { title: 'Maha Shivratri', start: '2026-02-15', color: '#e91e63' },
-              { title: 'Holi Break - Day 1', start: '2026-03-03', color: '#8e24aa' },
-              { title: 'Holi Break - Day 2', start: '2026-03-04', color: '#8e24aa' },
-              { title: 'Holi Break - Day 3', start: '2026-03-05', color: '#8e24aa' },
-              { title: 'Summer Vacation', start: '2025-05-19', end: '2025-06-15', color: '#00bcd4' },
-              { title: 'Durga Puja Vacation', start: '2025-09-29', end: '2025-10-05', color: '#ff5722' },
-              { title: 'Deepavali & Chhath', start: '2025-10-20', end: '2025-10-30', color: '#ff9800' },
-              { title: 'Winter Break', start: '2025-12-30', end: '2026-01-04', color: '#607d8b' },
-  { title: '1st Periodic Test', start: '2025-05-05', end: '2025-05-10', color: '#3f51b5' },
-  { title: '2nd Periodic Test', start: '2025-07-21', end: '2025-07-26', color: '#3f51b5' },
-  { title: 'Half Yearly Exam', start: '2025-09-08', end: '2025-09-27', color: '#3f51b5' },
-  { title: '3rd Periodic Test', start: '2025-11-24', end: '2025-11-29', color: '#3f51b5' },
-  { title: '4th Periodic Test', start: '2026-01-12', end: '2026-01-17', color: '#3f51b5' },
-  { title: 'Annual Exam', start: '2025-03-06', end: '2025-03-24', color: '#3f51b5' },
-
-
-  { title: 'Charitra Nirmaan Shivir', start: '2025-03-20', end: '2025-03-22', color: '#3f51b5' },
-  { title: 'Mahatma Hansraj Birthday', start: '2025-04-19', color: '#3f51b5' },
-  { title: 'DAV Foundation Day', start: '2025-06-01', color: '#3f51b5' },
-  { title: 'Independence Day', start: '2025-08-15', color: '#3f51b5' },
-  { title: "Teacher's Day", start: '2025-09-05', color: '#3f51b5' },
-  { title: 'Maharshi Dayanand Nirvana Diwas', start: '2025-10-30', color: '#3f51b5' },
-  { title: "Children's Day", start: '2025-11-14', color: '#3f51b5' },
-  { title: 'Mahatma N.D. Grover Birthday', start: '2025-11-15', color: '#3f51b5' },
-  { title: 'Swami Shradhanand Balidaan Diwas', start: '2025-12-25', color: '#3f51b5' },
-  { title: 'Republic Day', start: '2026-01-26', color: '#3f51b5' },
-  { title: 'Lala Lajpat Rai Birthday', start: '2026-01-28', color: '#3f51b5' },
-  { title: 'Mahatma N.D. Grover Smriti Diwas', start: '2026-02-06', color: '#3f51b5' },
-  { title: 'Maharishi Dayanand Birthday', start: '2026-02-12', color: '#3f51b5' },
-  { title: 'Maharishi Dayanand Bodh Diwas', start: '2026-02-26', color: '#3f51b5' }
-            ]
-          }
+        events: [
+          { title: '🎉 Eid-ul-Fitr', start: '2025-03-31', color: '#1e88e5' },
+          { title: '🌸 Ram Navami', start: '2025-04-06', color: '#fdd835' },
+          { title: '🏖 Summer Vacation', start: '2025-05-19', end: '2025-06-15', color: '#00acc1' },
+          { title: '📝 Annual Exam', start: '2025-03-06', end: '2025-03-24', color: '#5e35b1' },
+          { title: "👧 Children's Day", start: '2025-11-14', color: '#fb8c00' },
+          { title: "🍎 Teacher's Day", start: '2025-09-05', color: '#43a047' },
+          { title: "🏫 DAV Foundation Day", start: '2025-06-01', color: '#3949ab' },
+          { title: '🇮🇳 Independence Day', start: '2025-08-15', color: '#d32f2f' },
+          { title: '🎄 Christmas', start: '2025-12-25', color: '#c62828' },
         ],
-        eventClick: function(info) {
-          info.jsEvent.preventDefault();
-          if (info.event.extendedProps.description) {
-            alert(info.event.title + ":\n\n" + info.event.extendedProps.description);
+        eventDidMount: function (info) {
+          if (info.event.startStr === today) {
+            alert("📌 Today: " + info.event.title);
+          }
+
+          if (specialDays.includes(info.event.startStr)) {
+            setTimeout(() => {
+              confetti({ particleCount: 150, spread: 100, origin: { y: 0.6 } });
+            }, 300);
           }
         }
       });
 
       calendar.render();
     });
-
-    function toggleExplore() {
-      document.getElementById('explore-section').classList.toggle('hidden');
-    }
   </script>
 
 </body>
